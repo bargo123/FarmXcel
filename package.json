@@ -1,10 +1,10 @@
 {
   "name": "06-jobs-api",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "build": "node app.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,5 +27,15 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bargo123/FarmXcel.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/bargo123/FarmXcel/issues"
+  },
+  "homepage": "https://github.com/bargo123/FarmXcel#readme",
+  "description": ""
 }
