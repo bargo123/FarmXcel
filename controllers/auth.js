@@ -8,6 +8,7 @@ const registerUser = async (req, res) => {
 
 const login = async (req, res) => {
   console.log("login1")
+  
   const { email, password } = req.body;
   if (!email || !password) {
     console.log("login2")

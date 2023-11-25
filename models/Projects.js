@@ -5,20 +5,20 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     required: [true, "Please enter your project country"],
   },
-
+  segments: {
+    type: Array
+   },
   userID: {
     type: String,
     required: [true, "Please enter your project city"],
   },
 
   numberOfGreenHouses: {
-    required:true,
-    type: String,
+    type: Number,
   },
-
+  
   openFieldsArea: {
-    required:true,
-    type:String,
+    type:Number,
   },
   seasonStarted: {
     type:Boolean,

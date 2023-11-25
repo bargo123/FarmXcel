@@ -4,11 +4,26 @@ const submitProject = async (req, res) => {
     res.status(201).json({ project: project });
     
 };
+const updateIsSeasonStarted = async (projectId,greenHouse,openField) => {
+    const project = await Projects.findById({ _id: projectId });
+    if (openField != null && greenHouse != null) {
+        const projects = await Projects.findByIdAndUpdate({ _id: projectId }, { seasonStarted: true, numberOfGreenHouses: project.numberOfGreenHouses - greenHouse, openFieldsArea: project.openFieldsArea - openField });
+        return;
+    }
+    if (openField != null) {
+        const projects = await Projects.findByIdAndUpdate({ _id: projectId }, { seasonStarted: true, openFieldsArea: project.openFieldsArea - openField });
+        return;
+    }
+    if (greenHouse != null) {
+        const projects = await Projects.findByIdAndUpdate({ _id: projectId }, { seasonStarted: true, numberOfGreenHouses: project.numberOfGreenHouses - greenHouse});
+        return;
+ }
+
+};
 
 const getAllProjects = async (req, res) => {
     const { userID } = req.query;
-    console.log(req.body);
     const projects = await Projects.find({ userID }); 
     res.status(201).json({ project: projects });
 };
-module.exports = { submitProject,getAllProjects};
+module.exports = { submitProject,getAllProjects,updateIsSeasonStarted};
