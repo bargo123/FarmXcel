@@ -12,18 +12,20 @@ const countryRoute = require('./routes/country');
 const cropRoute = require('./routes/crops');
 const seasonRoute = require('./routes/season');
 const fcmRoute = require('./routes/fcm');
-const notificationRoute = require('./routes/notifications');
-const {startScheduler} = require('./utils/scheduler');
+const advertiserRoute = require('./routes/advertiser');
 
+const notificationRoute = require('./routes/notifications');
+const userNotificationRoute = require('./routes/user_notifications');
+const {startScheduler} = require('./utils/scheduler');
 const {getFcmTokenForUser} = require('./controllers/fcm');
 const { initializeApp, applicationDefault } = require("firebase-admin/app");
+const {getNotificationAtDay} = require('./controllers/notification');
 
 
 initializeApp({
   credential: applicationDefault(),
   projectId:"farmxcel"
 });
-
 
 
 // error handler
@@ -36,6 +38,8 @@ app.use("/api/v1/countries", countryRoute);
 app.use("/api/v1/projects", projectsRoute);
 app.use("/api/v1/crops", cropRoute);
 app.use("/api/v1/season", seasonRoute);
+app.use("/api/v1/user_notifications", userNotificationRoute);
+app.use("/api/v1/advertisers", advertiserRoute);
 app.use("/api/v1", notificationRoute);
 app.use("/api/v1", fcmRoute);
 
@@ -58,13 +62,12 @@ const port = process.env.PORT || 9000;
 
 const start = async () => {
   try {
+    
     await connectDB(process.env.MONGO_URI)
     await startScheduler();
+    console.log(await getNotificationAtDay("Cucmeber",170))
 
-    app.listen(port, () =>
-    
-      console.log(`Server is listening on port ${port}...`)
-    );
+    app.listen(port)
   } catch (error) {
     console.log(error);
   }

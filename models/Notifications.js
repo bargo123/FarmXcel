@@ -13,7 +13,22 @@ const Notifications = mongoose.Schema({
         type:String,
         required:true,
     },
+    
+    
 });
+
+const Articles = mongoose.Schema({
+    articleName: {
+     type:String,
+     required:true,
+    },
+    articleUrl: {
+        type:String,
+        required:true,
+    },
+   
+});
+
 
 
 const NotificationsSchema = mongoose.Schema({
@@ -21,7 +36,8 @@ const NotificationsSchema = mongoose.Schema({
         type:String,
         required:true,
         },
-    notifications:[Notifications]
+    notifications: [Notifications],
+    articles:[Articles]
 })
 
 module.exports = mongoose.model("Notifications", NotificationsSchema);
