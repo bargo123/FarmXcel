@@ -38,14 +38,14 @@ const getAllSeasonsApi = async (req, res) => {
     return season;
 }
 const getSeasonByID = async (req, res) => {
-    const season = await Season.findOne({projectId:projectId});
+    const season = await Season.findOne({projectID:req.query.projectID});
     if (!season) {
         res.status(500).json("something Went Wrong");
     }
-    res.status(200).json({season});
+    res.status(200).json(season);
 }
 
 const deleteSeason = (req, res) => {
 }
 
-module.exports = { startSeason, deleteSeason,getAllSeasons,getAllSeasonsApi,updateLifeCycle};
+module.exports = { startSeason, deleteSeason,getAllSeasons,getAllSeasonsApi,updateLifeCycle,getSeasonByID};
